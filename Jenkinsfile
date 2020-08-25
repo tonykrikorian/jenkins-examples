@@ -5,6 +5,7 @@ pipeline{
             steps{
                 echo "Building ${BRANCH_NAME}"
                 echo "Building application"
+                 sh "tidy -q -e *.html"
             }
 
         }
