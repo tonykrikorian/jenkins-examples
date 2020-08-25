@@ -22,7 +22,7 @@ pipeline{
                 echo "Testing ${BRANCH_NAME}"
                 echo "Testing application"
                 nodejs('NodeJS'){
-                    sh "npm test"
+                    sh "npm run test"
                 }
             }
 
