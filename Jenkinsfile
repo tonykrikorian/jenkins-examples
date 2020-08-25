@@ -19,6 +19,9 @@ pipeline{
             steps{
                 echo "Deploying ${BRANCH_NAME}"
                 echo "Deploying application"
+                withAWS(region: 'us-west-2',credentials:'AWS_DEVOPS'){
+                    echo "Login in AWS"
+                }
             }
         }
     }
