@@ -5,6 +5,10 @@ pipeline{
             steps{
                 echo "Building ${BRANCH_NAME}"
                 echo "Building application"
+                nodejs('NodeJS'){
+                    sh "npm install"
+                    sh "npm run build"
+                }
             }
 
         }
@@ -17,6 +21,9 @@ pipeline{
             steps{
                 echo "Testing ${BRANCH_NAME}"
                 echo "Testing application"
+                nodejs('NodeJS'){
+                    sh "npm test"
+                }
             }
 
         }
@@ -27,7 +34,7 @@ pipeline{
                 withAWS(region: 'us-west-2',credentials:'AWS_DEVOPS'){
                     echo "Login in AWS"
                     echo "Uploading to S3"
-                    s3Upload(file:'index.html', bucket:'jenkins-bucket-tony', pathStyleAccessEnabled :true,payloadSigningEnabled :true)
+                    s3Upload(file:'build', bucket:'jenkins-bucket-tony', pathStyleAccessEnabled :true,payloadSigningEnabled :true,path:'jenkins-bucket-tony/react-app')
                 }
             }
         }
